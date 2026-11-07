@@ -558,83 +558,186 @@ body,.topnav,.hero,.ship-section,.commerce-journey,.experience-section,.approach
 @media(max-width:720px){.theme-toggle{width:68px;height:36px;margin-left:0}.theme-toggle .theme-knob{width:27px;height:26px;top:4px;left:4px}html[data-theme="dark"] .theme-toggle .theme-knob{transform:translateX(32px)}.theme-toggle svg{width:15px;height:15px}}
 @media(prefers-reduced-motion:reduce){body,.topnav,.hero,.ship-section,.commerce-journey,.experience-section,.approach-section,.skills-section,.contact-section,.footer,.case-aside-card,.theme-toggle,.theme-toggle svg,.theme-toggle .theme-knob{transition:none!important}}
 
+
+/* SAM integration: SAM editorial comparison, spreadsheet interpretation, and expanded system flow. */
+.samx{
+ --samx-panel:#123b30;--samx-panel-raised:#1a4a39;--samx-panel-alt:#214e40;
+ --samx-line:rgba(191,236,207,.2);--samx-fg:#eef9ef;--samx-muted:#bdd3c3;
+ --samx-accent:#a9e6c4;--samx-accent-dim:#a7cab2;--samx-input:#153d31;
+ padding:34px 31px 28px;background:#10392d;color:var(--samx-fg)
+}
+html[data-theme="dark"] .samx{
+ --samx-panel:#203047;--samx-panel-raised:#2b3c53;--samx-panel-alt:#30445d;
+ --samx-line:rgba(175,204,242,.23);--samx-fg:#edf4fc;--samx-muted:#b1c3da;
+ --samx-accent:#c2dbfa;--samx-accent-dim:#abc5e3;--samx-input:#25354a;
+ background:#1e2b3d
+}
+.samx-kicker{display:block;font:700 10px/1.5 ui-monospace,Consolas,monospace;letter-spacing:.15em;color:var(--samx-accent);text-transform:uppercase}
+.samx-section-head{display:grid;grid-template-columns:1fr .78fr;gap:26px;align-items:end;margin:0 0 20px}
+.samx-section-head h4{font:normal clamp(29px,3.3vw,45px)/1.04 Georgia,"Times New Roman",serif;letter-spacing:-.056em;margin:12px 0 0;color:var(--samx-fg)}
+.samx-section-head h4 em{color:var(--samx-accent);font-weight:400}
+.samx-section-head p{color:var(--samx-muted);font-size:12px;line-height:1.85;margin:0}
+.samx-second-head{margin-top:39px}.samx-third-head{margin-top:37px}
+.samx-comparison{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--samx-line);border-radius:12px;overflow:hidden}
+.samx-compare{min-width:0;padding:20px 23px;background:var(--samx-panel)}
+.samx-compare-old{border-right:1px solid var(--samx-line)}
+.samx-compare-new{background:var(--samx-panel-alt)}
+.samx-compare-title{display:flex;align-items:center;gap:10px;color:var(--samx-fg);font-size:12px}
+.samx-status{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:rgba(255,255,255,.09);font-size:17px;flex:none}
+.samx-status-bad{color:#ffc8bf}.samx-status-good{color:#a7edd1}
+.samx-compare p{min-height:61px;color:var(--samx-muted);font-size:11.5px;line-height:1.75;margin:12px 0}
+.samx-mono{font:700 9.5px/1.7 ui-monospace,Consolas,monospace;letter-spacing:.01em;color:var(--samx-accent-dim)}
+.samx-mono.samx-good{color:var(--samx-accent)}
+.samx-workspace{border:1px solid var(--samx-line);border-radius:13px;overflow:hidden;background:var(--samx-panel)}
+.samx-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--samx-panel-alt);border-bottom:1px solid var(--samx-line)}
+.samx-tab{border:0;border-right:1px solid var(--samx-line);background:transparent;color:var(--samx-muted);display:flex;flex-direction:column;gap:7px;text-align:left;cursor:pointer;padding:17px 18px 19px;position:relative;transition:background .18s}
+.samx-tab:last-child{border-right:0}.samx-tab:hover{background:rgba(255,255,255,.05)}
+.samx-tab[aria-selected="true"]{background:rgba(182,226,222,.09);color:var(--samx-fg)}
+.samx-tab[aria-selected="true"]:after{content:"";height:3px;position:absolute;bottom:0;left:15px;right:15px;border-radius:3px;background:var(--samx-accent)}
+.samx-tab-num{font:700 9px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.06em;color:var(--samx-accent)}
+.samx-tab strong{font-size:13px;letter-spacing:-.015em}.samx-tab small{color:var(--samx-muted);font-size:10px;line-height:1.5}
+.samx-visual-flow{display:grid;grid-template-columns:minmax(0,1fr) 130px minmax(0,1fr);gap:12px;padding:15px;align-items:stretch}
+.samx-sheet{min-width:0;border:1px solid var(--samx-line);border-radius:9px;overflow:hidden;background:var(--samx-input);display:flex;flex-direction:column}
+.samx-sheet-title{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 12px;background:var(--samx-panel-alt);border-bottom:1px solid var(--samx-line);font:700 9px/1.4 ui-monospace,Consolas,monospace;color:var(--samx-fg)}
+.samx-sheet-title span{color:var(--samx-accent);font-size:9px}
+.samx-sheet-table{min-height:110px;flex:1;overflow:auto}
+.samx-sheet table{width:100%;border-collapse:collapse;font:500 10px/1.6 ui-monospace,Consolas,monospace;min-width:235px}
+.samx-sheet th,.samx-sheet td{padding:10px 9px;border-right:1px solid var(--samx-line);border-bottom:1px solid var(--samx-line);text-align:left;vertical-align:top;white-space:normal;overflow-wrap:anywhere}
+.samx-sheet th:last-child,.samx-sheet td:last-child{border-right:0}
+.samx-sheet tr:last-child td{border-bottom:0}
+.samx-sheet th{color:var(--samx-accent);background:rgba(255,255,255,.03);font-weight:700}
+.samx-sheet td{color:var(--samx-fg)}
+.samx-sheet-note{border-top:1px solid var(--samx-line);padding:10px 12px;color:var(--samx-muted);font-size:10px;line-height:1.7}
+.samx-sheet-note strong{color:var(--samx-accent)}
+.samx-transform{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:12px 0}
+.samx-transform-icon{display:grid;place-items:center;background:var(--samx-panel-alt);border:1px solid var(--samx-line);width:53px;height:53px;border-radius:15px;font:400 31px Georgia,serif;color:var(--samx-accent)}
+.samx-transform>b{font:700 16px/1.2 ui-monospace,Consolas,monospace}
+.samx-transform>span{font:700 8px/1.65 ui-monospace,Consolas,monospace;letter-spacing:.045em;color:var(--samx-muted)}
+.samx-transform-rule{width:80%;height:1px;background:var(--samx-line)}
+.samx-transform-list{display:grid;gap:6px;width:100%}
+.samx-transform-list div{font:600 9px/1.45 ui-monospace,Consolas,monospace;color:var(--samx-accent);padding:7px 5px;background:var(--samx-panel-alt);border:1px solid var(--samx-line);border-radius:5px}
+.samx-workspace-footer{display:flex;align-items:center;justify-content:space-between;gap:17px;border-top:1px solid var(--samx-line);padding:12px 15px;background:var(--samx-panel-alt)}
+.samx-workspace-footer p{margin:0;color:var(--samx-muted);font-size:11px;line-height:1.6}
+.samx-workspace-footer strong{color:var(--samx-fg)}
+.samx-workspace-footer>span{font:700 9px ui-monospace,Consolas,monospace;white-space:nowrap;color:var(--samx-accent)}
+.samx-workflow{border:1px solid var(--samx-line);border-radius:12px;background:var(--samx-panel);overflow:hidden}
+.samx-workflow summary{display:flex;gap:13px;align-items:center;padding:19px 20px;cursor:pointer;list-style:none}
+.samx-workflow summary::-webkit-details-marker{display:none}
+.samx-workflow summary:focus-visible,.samx-tab:focus-visible{outline:2px solid var(--samx-accent);outline-offset:-3px}
+.samx-summary-icon{display:grid;place-items:center;flex:none;width:37px;height:37px;border-radius:9px;background:var(--samx-panel-alt);border:1px solid var(--samx-line);font-size:19px;color:var(--samx-accent)}
+.samx-summary-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.samx-summary-copy strong{font-size:13px;color:var(--samx-fg)}
+.samx-summary-copy small{font-size:10px;line-height:1.6;color:var(--samx-muted)}
+.samx-summary-action{margin-left:auto;white-space:nowrap;color:var(--samx-accent);font:700 10px ui-monospace,Consolas,monospace}
+.samx-workflow[open] .samx-summary-action>span{display:inline-block;transform:rotate(45deg)}
+.samx-workflow-content{padding:4px 17px 21px;border-top:1px solid var(--samx-line)}
+.samx-lane{display:grid;grid-template-columns:132px minmax(0,1fr);gap:13px;padding:18px 0 2px}
+.samx-lane+.samx-lane{border-top:1px solid var(--samx-line);margin-top:14px}
+.samx-lane-head b{font:700 10px/1.6 ui-monospace,Consolas,monospace;letter-spacing:.045em;color:var(--samx-accent)}
+.samx-lane-head p{font-size:10px;line-height:1.7;color:var(--samx-muted);margin:6px 0}
+.samx-node-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.samx-node{min-width:0;min-height:145px;padding:11px 10px;border:1px solid var(--samx-line);border-radius:8px;background:var(--samx-panel-alt);position:relative}
+.samx-node:not(:last-child):after{content:'→';position:absolute;top:40%;right:-9px;z-index:2;color:var(--samx-accent);font-size:14px}
+.samx-node span{display:block;font:700 9px/1.5 ui-monospace,Consolas,monospace;color:var(--samx-accent);min-height:15px}
+.samx-node strong{display:block;margin-top:8px;font-size:10px;line-height:1.4;color:var(--samx-fg)}
+.samx-node p{margin:6px 0 0;font-size:9px;line-height:1.65;color:var(--samx-muted)}
+.samx-node-highlight{border-color:var(--samx-accent);background:var(--samx-panel-raised)}
+.samx-takeaway{margin:15px 0 0;padding:21px 25px;background:var(--samx-panel-alt);border:1px solid var(--samx-line);border-left:3px solid var(--samx-accent);border-radius:9px}
+.samx-takeaway>span{display:flex;align-items:center;gap:14px;font:700 10px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.13em;color:var(--samx-accent)}
+.samx-takeaway>span i{height:1px;flex:1;background:var(--samx-line)}
+.samx-takeaway p{font:normal clamp(19px,2.5vw,27px)/1.28 Georgia,"Times New Roman",serif;letter-spacing:-.035em;color:var(--samx-fg);margin:12px 0 0}
+.samx-demo-disclaimer{margin:14px 4px 0;color:var(--samx-muted);font:500 10px/1.7 ui-monospace,Consolas,monospace}
+@media(max-width:1100px){.samx-visual-flow{grid-template-columns:minmax(0,1fr);gap:9px}.samx-transform{flex-direction:row;flex-wrap:wrap;padding:9px}.samx-transform-rule{display:none}.samx-transform-list{width:auto;display:flex;flex-wrap:wrap}.samx-sheet-table{min-height:unset}}
+@media(max-width:720px){.samx{padding:25px 15px}.samx-section-head{grid-template-columns:1fr;gap:7px}.samx-comparison{grid-template-columns:1fr}.samx-compare-old{border-right:0;border-bottom:1px solid var(--samx-line)}.samx-compare p{min-height:unset}.samx-tab{padding:13px 10px 16px}.samx-tab strong{font-size:11px}.samx-tab small{font-size:9px}.samx-tab-num{font-size:8px}.samx-lane{grid-template-columns:1fr;gap:9px}.samx-node-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.samx-workspace-footer{flex-direction:column;align-items:flex-start;gap:5px}.samx-takeaway{padding:17px}.samx-compare{padding:16px}.samx-section-head h4{font-size:31px}}
+@media(max-width:400px){.samx-node-grid{grid-template-columns:1fr}.samx-node{min-height:unset}.samx-node:not(:last-child):after{display:none}.samx-workflow summary{padding:12px}.samx-summary-action{font-size:9px}.samx-summary-icon{width:31px;height:31px}}
 </style></head><body><header class="topnav"><a aria-label="Mohammed Almutairi home" class="identity" href="#top"><span class="m-mark"><svg aria-hidden="true" viewbox="0 0 70 70"><path d="M9 53V16l26 24 26-24v37" fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="5"></path><circle cx="35" cy="16" fill="currentColor" r="4"></circle></svg></span><span>Mohammed<span class="surname"> Almutairi</span></span></a>
 <nav aria-label="Main navigation"><a href="#shipmatrix">ShipMatrix</a><a href="#commerce">Commerce</a><a href="#experience">Experience</a><a href="#cv">CV</a></nav>
 <a class="nav-cta" href="#contact">Let's talk <span>↗</span></a><button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode"><span class="theme-knob" aria-hidden="true"></span><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 15.5A8.8 8.8 0 0 1 8.5 3.2 9 9 0 1 0 20.8 15.5Z"/></svg></button></header><main><section class="hero" id="top"><div class="wrap hero-layout"><div class="hero-copy"><span class="eyebrow">MOHAMMED ALMUTAIRI / BACKEND SOFTWARE ENGINEER / RIYADH</span><h1>From concept.<br/><em>To production.</em></h1><p>I turn operational problems into well-structured software. From enterprise logistics to adaptable e-commerce, I design, build and own systems people actually rely on.</p><div class="hero-actions"><a class="btn primary" href="#shipmatrix">Explore ShipMatrix <span>↘</span></a><a class="btn" href="#contact">Contact me <span>↗</span></a></div><div class="stats"><div><strong>1M<span>+</span></strong><small>Orders processed<br/>through ShipMatrix</small></div><div><strong>30<span>%</span></strong><small>Logistics workload automated<br/>at Align Technology</small></div><div><strong>02</strong><small>Startups adopting the<br/>configurable commerce backend</small></div></div></div><div class="hero-portrait"><div class="portrait-frame"><img alt="Mohammed Almutairi, backend software engineer" onerror="this.hidden=true;this.parentElement.classList.add('no-photo')" src="https://shipmatrix.net/static/images/meeee.jpg"/><div aria-hidden="true" class="portrait-fallback">MA<span>BACKEND ENGINEER</span></div><div class="portrait-caption">Mohammed Almutairi <span>Riyadh, Saudi Arabia</span></div></div></div></div></section>
 <section class="ship-section case-study-section" data-case="shipmatrix" id="shipmatrix"><div class="case-shell case-shell--ship"><aside aria-label="ShipMatrix case study navigation" class="case-aside case-aside--ship"><div class="case-aside-card"><span class="case-topline">CASE STUDY  /  01</span><div class="case-side-brand case-side-brand--ship"><div aria-label="ShipMatrix brand panel" class="ship-visual"><div aria-hidden="true" class="brand-watermark">ShipMatrix</div><img alt="Official ShipMatrix logo" onerror="this.hidden=true;this.parentElement.classList.add('no-logo')" src="https://shipmatrix.net/static/images/Logoo.jpg"/><div aria-hidden="true" class="brand-fallback">ShipMatrix.</div><div class="ship-visual-meta"><span>Smart Adaptable Mapping</span><span>Warehouse workflows</span><span>Carrier-ready output</span></div></div><span class="eyebrow">FEATURED CASE STUDY / 01</span><h2 class="ship-name">ShipMatrix.</h2><div class="ship-subtitle">The enterprise-scale system I designed and built independently.</div><a aria-label="Try the live ShipMatrix platform: 1,000 free shipments with Starter sign-up" class="ship-live-cta" href="https://shipmatrix.net/signup/" rel="noopener noreferrer" target="_blank"><span aria-hidden="true" class="ship-live-cta-dot"></span><span class="ship-live-cta-copy"><strong>LIVE PLATFORM · 1,000 SHIPMENTS FREE</strong><small>Sign up for a Starter account and try it yourself.</small></span><span aria-hidden="true" class="ship-live-cta-arrow">↗</span></a></div><div class="case-progress"><div class="case-progress-head"><span class="case-progress-label">INSIDE THIS SYSTEM</span><span class="case-progress-count">01 / 04</span></div><nav aria-label="ShipMatrix chapters" class="case-step-list"><a class="case-step" href="#sm-overview"><span class="case-step-number">01</span><span class="case-step-text"><span class="case-step-name">The problem</span><span class="case-step-desc">Real-world operations</span></span></a><a class="case-step" href="#sam-showcase"><span class="case-step-number">02</span><span class="case-step-text"><span class="case-step-name">The SAM engine</span><span class="case-step-desc">Configured interpretation</span></span></a><a class="case-step" href="#sm-capabilities"><span class="case-step-number">03</span><span class="case-step-text"><span class="case-step-name">Fulfillment layer</span><span class="case-step-desc">What the platform handles</span></span></a><a class="case-step" href="#sm-outcome"><span class="case-step-number">04</span><span class="case-step-text"><span class="case-step-name">The outcome</span><span class="case-step-desc">Why the system matters</span></span></a></nav></div></div></aside><div class="case-main case-main--ship"><div class="case-chapter-lead"><span class="case-overline">ENGINEERING CASE STUDY / 01</span><span class="case-lead-right">FROM RAW EXPORTS TO SHIPMENTS ↘</span></div><div class="ship-detail">
 <div class="detail-heading" id="sm-overview"><span class="eyebrow">01 / The flagship system</span><h2>Built by someone<br/>who <em>lived the problem.</em></h2><p>ShipMatrix is a B2B logistics automation platform I designed, built and operated independently. It bridges inconsistent merchant exports and actual warehouse work, then prepares carrier-ready shipping data—without making merchants rebuild their ERP or OMS processes.</p><div class="pill-link-row"><a href="https://shipmatrix.net" rel="noopener noreferrer" target="_blank">Visit shipmatrix.net ↗</a><span>Lead Backend Engineer · Oct 2023–present</span></div></div>
 <div aria-labelledby="sam-title" class="sam-showcase" id="sam-showcase">
-<div class="sam-intro">
-<div><span class="sam-kicker">ENGINEERING DEEP DIVE / SMART ADAPTABLE MAPPING</span><h3 id="sam-title">Smart Adaptable<br/><em>Mapping (SAM)</em></h3></div>
-<p>Every business exports differently. SAM uses a one-time, 18-question setup to interpret the structure, field relationships and missing values of each customer's data—then applies the appropriate processing each day without making customers rebuild their files.</p>
-</div>
-<div aria-label="Explore three SAM input structures" class="sam-switcher" role="tablist">
-<button aria-controls="sam-panel-address" aria-selected="true" data-sam-tab="address" id="sam-tab-address" role="tab" tabindex="0" type="button"><span class="sam-switcher-index">01 /</span><span class="sam-switcher-title">Split address</span><span class="sam-switcher-small">3 address fields · No Qty</span></button>
-<button aria-controls="sam-panel-quantity" aria-selected="false" data-sam-tab="quantity" id="sam-tab-quantity" role="tab" tabindex="-1" type="button"><span class="sam-switcher-index">02 /</span><span class="sam-switcher-title">Repeated items</span><span class="sam-switcher-small">Quantity from item rows</span></button>
-<button aria-controls="sam-panel-reference" aria-selected="false" data-sam-tab="reference" id="sam-tab-reference" role="tab" tabindex="-1" type="button"><span class="sam-switcher-index">03 /</span><span class="sam-switcher-title">Address reference</span><span class="sam-switcher-small">Correct source of truth</span></button>
-</div>
-<div aria-labelledby="sam-tab-address" class="sam-stage" data-sam-panel="address" id="sam-panel-address" role="tabpanel">
-<div class="sam-meta"><strong>01 / STRUCTURE A — SPLIT ADDRESS</strong><span>Demonstration with fictional data</span></div>
-<div class="sam-dataflow">
-<div class="sam-panel sam-input">
-<div class="sam-panel-header"><span>INPUT / EXISTING EXPORT</span><b>Daily OMS export</b></div>
-<div class="sam-records"><div class="sam-record"><span class="sam-field">Customer ID</span><span class="sam-value">C-104</span></div><div class="sam-record"><span class="sam-field">Address 1</span><span class="sam-value">King Fahd Road</span></div><div class="sam-record"><span class="sam-field">Address 2</span><span class="sam-value">Al Olaya District</span></div><div class="sam-record"><span class="sam-field">Address 3</span><span class="sam-value">Building 12</span></div><div class="sam-record"><span class="sam-field">Phone</span><span class="sam-value">055XXXXXXX</span></div><div class="sam-record"><span class="sam-field">Qty</span><span class="sam-value sam-empty">— Not provided —</span></div></div>
-</div>
-<div aria-hidden="true" class="sam-flow-arrow">→</div>
-<div class="sam-engine">
-<div class="sam-engine-id"><span class="sam-engine-mark">S</span>SAM</div>
-<div class="sam-engine-title">Configured interpretation</div>
-<div class="sam-engine-actions"><div class="sam-action">Combine three address parts into one delivery address</div><div class="sam-action">Avoid duplicated address content when fields are reused</div><div class="sam-action">Use a quantity of 1 for a single item with no Qty field</div></div>
-</div>
-<div aria-hidden="true" class="sam-flow-arrow">→</div>
-<div class="sam-panel sam-output">
-<div class="sam-panel-header"><span>OUTPUT / SHIPMENT DATA</span><b>Consistent structure</b></div>
-<div class="sam-records"><div class="sam-record"><span class="sam-field">Customer</span><span class="sam-value">C-104</span></div><div class="sam-record"><span class="sam-field">Address</span><span class="sam-value">King Fahd Road, Al Olaya District, Building 12</span></div><div class="sam-record"><span class="sam-field">Contact</span><span class="sam-value">055XXXXXXX</span></div><div class="sam-record"><span class="sam-field">Quantity</span><span class="sam-value">1 <small>Determined from source representation</small></span></div><div class="sam-record"><span class="sam-field">Status</span><span class="sam-value">Shipment-ready record</span></div></div>
-</div>
-</div>
-<div class="sam-dataflow-note"><strong>DIFFERENT INPUT. SAME DESTINATION.</strong></div>
-</div><div aria-labelledby="sam-tab-quantity" class="sam-stage" data-sam-panel="quantity" hidden="" id="sam-panel-quantity" role="tabpanel">
-<div class="sam-meta"><strong>02 / STRUCTURE B — REPEATED ITEMS</strong><span>Demonstration with fictional data</span></div>
-<div class="sam-dataflow">
-<div class="sam-panel sam-input">
-<div class="sam-panel-header"><span>INPUT / EXISTING EXPORT</span><b>Daily export · two item rows</b></div>
-<div class="sam-records"><div class="sam-record"><span class="sam-field">Customer ID</span><span class="sam-value">C-208</span></div><div class="sam-record"><span class="sam-field">Row 01</span><span class="sam-value">Order 72 · Item A</span></div><div class="sam-record"><span class="sam-field">Row 02</span><span class="sam-value">Order 72 · Item A</span></div><div class="sam-record"><span class="sam-field">Qty</span><span class="sam-value sam-empty">— Not provided —</span></div><div class="sam-record"><span class="sam-field">Dial code</span><span class="sam-value">966</span></div><div class="sam-record"><span class="sam-field">Phone</span><span class="sam-value">50XXXXXXX</span></div></div>
-</div>
-<div aria-hidden="true" class="sam-flow-arrow">→</div>
-<div class="sam-engine">
-<div class="sam-engine-id"><span class="sam-engine-mark">S</span>SAM</div>
-<div class="sam-engine-title">Configured interpretation</div>
-<div class="sam-engine-actions"><div class="sam-action">Identify the relevant repeated item records</div><div class="sam-action">Determine quantity from the item occurrences</div><div class="sam-action">Handle a country code stored separately from the number</div></div>
-</div>
-<div aria-hidden="true" class="sam-flow-arrow">→</div>
-<div class="sam-panel sam-output">
-<div class="sam-panel-header"><span>OUTPUT / SHIPMENT DATA</span><b>Consistent structure</b></div>
-<div class="sam-records"><div class="sam-record"><span class="sam-field">Customer</span><span class="sam-value">C-208</span></div><div class="sam-record"><span class="sam-field">Order</span><span class="sam-value">72</span></div><div class="sam-record"><span class="sam-field">Item</span><span class="sam-value">Item A</span></div><div class="sam-record"><span class="sam-field">Quantity</span><span class="sam-value">2 <small>Determined from source representation</small></span></div><div class="sam-record"><span class="sam-field">Contact</span><span class="sam-value">Country code + local number</span></div></div>
-</div>
-</div>
-<div class="sam-dataflow-note"><strong>DIFFERENT INPUT. SAME DESTINATION.</strong></div>
-</div><div aria-labelledby="sam-tab-reference" class="sam-stage" data-sam-panel="reference" hidden="" id="sam-panel-reference" role="tabpanel">
-<div class="sam-meta"><strong>03 / STRUCTURE C — REFERENCE DATA</strong><span>Demonstration with fictional data</span></div>
-<div class="sam-dataflow">
-<div class="sam-panel sam-input">
-<div class="sam-panel-header"><span>INPUT / EXISTING EXPORT</span><b>OMS export + address reference</b></div>
-<div class="sam-records"><div class="sam-record"><span class="sam-field">Order</span><span class="sam-value">Order 310</span></div><div class="sam-record"><span class="sam-field">Customer ID</span><span class="sam-value">C-319</span></div><div class="sam-record"><span class="sam-field">OMS address</span><span class="sam-value sam-empty">Outdated / unreliable</span></div><div class="sam-record"><span class="sam-field">Reference ID</span><span class="sam-value">C-319</span></div><div class="sam-record"><span class="sam-field">Reference address</span><span class="sam-value">King Abdullah Road, Riyadh</span></div><div class="sam-record"><span class="sam-field">Qty</span><span class="sam-value">3</span></div></div>
-</div>
-<div aria-hidden="true" class="sam-flow-arrow">→</div>
-<div class="sam-engine">
-<div class="sam-engine-id"><span class="sam-engine-mark">S</span>SAM</div>
-<div class="sam-engine-title">Configured interpretation</div>
-<div class="sam-engine-actions"><div class="sam-action">Use the configured Address Reference source of truth</div><div class="sam-action">Relate the order to customer identity</div><div class="sam-action">Carry correct contact and delivery data into fulfillment</div></div>
-</div>
-<div aria-hidden="true" class="sam-flow-arrow">→</div>
-<div class="sam-panel sam-output">
-<div class="sam-panel-header"><span>OUTPUT / SHIPMENT DATA</span><b>Consistent structure</b></div>
-<div class="sam-records"><div class="sam-record"><span class="sam-field">Customer</span><span class="sam-value">C-319</span></div><div class="sam-record"><span class="sam-field">Order</span><span class="sam-value">310</span></div><div class="sam-record"><span class="sam-field">Address</span><span class="sam-value">King Abdullah Road, Riyadh</span></div><div class="sam-record"><span class="sam-field">Source</span><span class="sam-value">Address Reference</span></div><div class="sam-record"><span class="sam-field">Quantity</span><span class="sam-value">3</span></div></div>
-</div>
-</div>
-<div class="sam-dataflow-note"><strong>DIFFERENT INPUT. SAME DESTINATION.</strong></div>
-</div>
-<div class="sam-outcome"><strong>One reusable configuration. Everyday operational value.</strong><span>18 setup questions → Repeatable shipment processing</span></div>
+  <div class="sam-intro">
+    <div><span class="sam-kicker">ENGINEERING DEEP DIVE / SMART ADAPTABLE MAPPING</span><h3 id="sam-title">Smart Adaptable<br><em>Mapping (SAM)</em></h3></div>
+    <p>Every business exports differently. SAM uses a one-time, 18-question setup to interpret data structures, values, and their relationships—then reinterprets each uploaded file against the saved model to produce accurate, carrier-ready data.</p>
+  </div>
+  <div class="samx">
+    <div class="samx-section-head">
+      <div><span class="samx-kicker">01 / THE OPERATIONAL PROBLEM</span><h4>Different formats.<br><em>One understood structure.</em></h4></div>
+      <p>Merchant exports are rarely standardized. SAM adapts to the data they already generate, instead of requiring them to redesign their systems.</p>
+    </div>
+    <div class="samx-comparison" aria-label="Rigid templates compared with SAM">
+      <article class="samx-compare samx-compare-old">
+        <div class="samx-compare-title"><span class="samx-status samx-status-bad" aria-hidden="true">×</span><strong>Traditional template constraints</strong></div>
+        <p>Different exports force teams to rearrange columns, combine address fields, or manually correct data before shipment creation.</p>
+        <span class="samx-mono">MERCHANT FILE → MANUAL FIXES → CARRIER TEMPLATE</span>
+      </article>
+      <article class="samx-compare samx-compare-new">
+        <div class="samx-compare-title"><span class="samx-status samx-status-good" aria-hidden="true">✓</span><strong>Smart Adaptable Mapping</strong></div>
+        <p>Interpret the relationships once, save the model, then reinterpret the actual values on each subsequent upload.</p>
+        <span class="samx-mono samx-good">MERCHANT FILE → SAVED MODEL + REINTERPRETATION → OUTPUT</span>
+      </article>
+    </div>
+    <div class="samx-section-head samx-second-head">
+      <div><span class="samx-kicker">02 / MAPPING IN ACTION</span><h4>Watch the structure <em>adapt.</em></h4></div>
+      <p>Three fictional inputs. One consistent destination. Switch scenarios to see what SAM needs to interpret.</p>
+    </div>
+    <div class="samx-workspace">
+      <div class="samx-tabs" role="tablist" aria-label="SAM structure examples">
+        <button type="button" class="samx-tab" role="tab" aria-selected="true" aria-controls="samx-demo-panel" id="samx-tab-address" tabindex="0" data-samx-scenario="address"><span class="samx-tab-num">01 / STRUCTURE A</span><strong>Split address</strong><small>Three fields, no Qty</small></button>
+        <button type="button" class="samx-tab" role="tab" aria-selected="false" aria-controls="samx-demo-panel" id="samx-tab-quantity" tabindex="-1" data-samx-scenario="quantity"><span class="samx-tab-num">02 / STRUCTURE B</span><strong>Repeated items</strong><small>Quantity from item rows</small></button>
+        <button type="button" class="samx-tab" role="tab" aria-selected="false" aria-controls="samx-demo-panel" id="samx-tab-reference" tabindex="-1" data-samx-scenario="reference"><span class="samx-tab-num">03 / STRUCTURE C</span><strong>Address reference</strong><small>Correct source of truth</small></button>
+      </div>
+      <div class="samx-visual-flow" id="samx-demo-panel" role="tabpanel" aria-labelledby="samx-tab-address">
+        <article class="samx-sheet" aria-label="Fictional merchant input">
+          <div class="samx-sheet-title"><strong>01 / INPUT</strong><span id="samx-input-label">MERCHANT / OMS EXPORT</span></div>
+          <div class="samx-sheet-table"><table id="samx-input-table" aria-label="Source input columns"><thead><tr><th>Customer</th><th>Address 1</th><th>Address 2</th><th>Address 3</th></tr></thead><tbody><tr><td>C-104</td><td>King Fahd Rd</td><td>Al Olaya</td><td>Building 12</td></tr></tbody></table></div>
+          <div class="samx-sheet-note" id="samx-input-note">Three separate address parts; <strong>no Qty column</strong>.</div>
+        </article>
+        <div class="samx-transform" aria-label="Configured SAM interpretation">
+          <div class="samx-transform-icon" aria-hidden="true">S</div>
+          <b>SAM</b><span>INTERPRETS VALUES<br>&amp; RELATIONSHIPS</span>
+          <div class="samx-transform-rule" aria-hidden="true"></div>
+          <div class="samx-transform-list" id="samx-transform-list"><div>Combine mapped address fields</div><div>Infer single-item quantity</div></div>
+        </div>
+        <article class="samx-sheet" aria-label="Normalized carrier-ready output">
+          <div class="samx-sheet-title"><strong>02 / OUTPUT</strong><span>CARRIER-READY FORMAT</span></div>
+          <div class="samx-sheet-table"><table id="samx-output-table" aria-label="Normalized output"><thead><tr><th>Customer</th><th>Delivery address</th><th>Quantity</th></tr></thead><tbody><tr><td>C-104</td><td>King Fahd Rd, Al Olaya, Building 12</td><td>1</td></tr></tbody></table></div>
+          <div class="samx-sheet-note" id="samx-output-note">One clean delivery address and <strong>quantity 1</strong>.</div>
+        </article>
+      </div>
+      <div class="samx-workspace-footer"><p id="samx-scenario-explain"><strong>Split address:</strong> SAM combines the configured fields and handles an absent quantity value according to the data structure.</p><span>SYNTHETIC EXAMPLE</span></div>
+    </div>
+    <div class="samx-section-head samx-third-head">
+      <div><span class="samx-kicker">03 / UNDER THE HOOD</span><h4>Two moments of <em>interpretation.</em></h4></div>
+      <p>One interpretation during setup. Another against each new upload—where actual values can change how the output is produced.</p>
+    </div>
+    <details class="samx-workflow">
+      <summary><span class="samx-summary-icon" aria-hidden="true">↗</span><span class="samx-summary-copy"><strong>Explore the underlying workflow</strong><small>From initial mapping and workbook configuration to repeat shipment creation</small></span><span class="samx-summary-action">EXPAND <span aria-hidden="true">+</span></span></summary>
+      <div class="samx-workflow-content">
+        <div class="samx-lane">
+          <div class="samx-lane-head"><b>ONE-TIME SETUP</b><p>Learn the original file structure and save the merchant-specific model.</p></div>
+          <div class="samx-node-grid">
+            <div class="samx-node"><span>01</span><strong>Create a saved model</strong><p>Start a mapping profile for the merchant's export.</p></div>
+            <div class="samx-node samx-node-highlight"><span>02 · INTERPRETATION #1</span><strong>Answer mapping questions</strong><p>Interprets data structure, values, and their relationships through 18 questions to build the saved mapping model.</p></div>
+            <div class="samx-node"><span>03</span><strong>Customize the workbook</strong><p>Set shipping and item-handling requirements.</p></div>
+            <div class="samx-node"><span>04</span><strong>Save the configuration</strong><p>Reuse the model for later shipment batches.</p></div>
+          </div>
+        </div>
+        <div class="samx-lane">
+          <div class="samx-lane-head"><b>AFTER ONE-TIME SETUP</b><p>Interpret each new export and prepare an accurate, carrier-ready file.</p></div>
+          <div class="samx-node-grid">
+            <div class="samx-node"><span>01</span><strong>Export from the OMS</strong><p>Obtain the merchant's shipment sheet.</p></div>
+            <div class="samx-node"><span>02</span><strong>Choose model + Carrier</strong><p>Apply the saved mapping and destination requirements.</p></div>
+            <div class="samx-node samx-node-highlight"><span>03 · INTERPRETATION #2</span><strong>Upload input files</strong><p>Reinterprets uploaded values and their relationships against the saved model, adapting output to the actual file structure—for example, whether a Qty column exists.</p></div>
+            <div class="samx-node"><span>04</span><strong>Get carrier-ready output</strong><p>Download normalized shipping data for the selected carrier.</p></div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <div class="samx-takeaway" aria-label="Key business impact of SAM"><span>THE BUSINESS IMPACT <i></i></span><p>This way, not a single change the merchant have to do in their systems to automate their shipments.</p></div>
+    <p class="samx-demo-disclaimer">All records above are illustrative. They are not customer data, live output, or a reproduction of ShipMatrix's private implementation.</p>
+  </div>
+  <div class="sam-outcome"><strong>One reusable configuration. Everyday operational value.</strong><span>18 setup questions → Repeatable shipment processing</span></div>
 </div>
 <div aria-label="SAM engineering capabilities" class="sam-more">
 <div class="sam-more-item"><span>01 / ADAPTABILITY</span><b>No fixed templates or headers</b><p>Built for existing ERP, OMS, Excel and CSV exports—rather than forcing customers into one rigid format.</p></div>
@@ -908,4 +1011,80 @@ body,.topnav,.hero,.ship-section,.commerce-journey,.experience-section,.approach
   window.addEventListener('hashchange',schedule);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refresh);else refresh();
 })();
-</script><script id="theme-controller">(function(){var root=document.documentElement;var toggle=document.getElementById('theme-toggle');if(!toggle)return;function sync(){var dark=root.getAttribute('data-theme')==='dark';toggle.setAttribute('aria-pressed',String(dark));toggle.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');toggle.setAttribute('title',dark?'Switch to light mode':'Switch to dark mode');}toggle.addEventListener('click',function(){var next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);try{localStorage.setItem('mfa-portfolio-theme',next);}catch(e){}sync();});sync();})();</script></body></html>
+</script><script id="theme-controller">(function(){var root=document.documentElement;var toggle=document.getElementById('theme-toggle');if(!toggle)return;function sync(){var dark=root.getAttribute('data-theme')==='dark';toggle.setAttribute('aria-pressed',String(dark));toggle.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');toggle.setAttribute('title',dark?'Switch to light mode':'Switch to dark mode');}toggle.addEventListener('click',function(){var next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);try{localStorage.setItem('mfa-portfolio-theme',next);}catch(e){}sync();});sync();})();</script>
+<script id="samx-integrated-demo-script">
+(function(){
+  const examples = {
+    address: {
+      label: 'DAILY OMS EXPORT',
+      inputHeaders: ['Customer','Address 1','Address 2','Address 3','Phone'],
+      inputRows: [['C-104','King Fahd Road','Al Olaya District','Building 12','055XXXXXXX']],
+      outputHeaders: ['Customer','Delivery address','Contact','Quantity'],
+      outputRows: [['C-104','King Fahd Road, Al Olaya District, Building 12','055XXXXXXX','1']],
+      inputNote: 'Three separate address parts; <strong>no Qty column</strong>.',
+      outputNote: 'Address parts consolidated and <strong>quantity 1</strong> determined from representation.',
+      steps: ['Combine mapped address fields','Handle missing Qty from structure'],
+      explanation: '<strong>Split address:</strong> SAM uses configured relationships to merge address fields and determine a default single-item quantity without requiring an extra column.'
+    },
+    quantity: {
+      label: 'TWO ITEM ROWS / ONE ORDER',
+      inputHeaders: ['Order','Customer','Item','Dial code','Phone'],
+      inputRows: [['72','C-208','Item A','966','50XXXXXXX'],['72','C-208','Item A','966','50XXXXXXX']],
+      outputHeaders: ['Order','Customer','Item','Quantity','Contact'],
+      outputRows: [['72','C-208','Item A','2','966 50XXXXXXX']],
+      inputNote: 'The item occurs in two rows; <strong>Qty is not provided</strong>.',
+      outputNote: '<strong>Quantity 2</strong> from occurrence count; phone and dial code combined.',
+      steps: ['Relate repeated item records','Infer quantity from occurrences'],
+      explanation: '<strong>Repeated items:</strong> SAM interprets the relationship between order and item rows to determine quantity, even when an explicit Qty field is absent.'
+    },
+    reference: {
+      label: 'OMS EXPORT + ADDRESS REFERENCE',
+      inputHeaders: ['Source','Customer','Address','Qty'],
+      inputRows: [['OMS export','C-319','Outdated / unreliable','3'],['Address reference','C-319','King Abdullah Road, Riyadh','—']],
+      outputHeaders: ['Order','Customer','Delivery address','Quantity','Source'],
+      outputRows: [['310','C-319','King Abdullah Road, Riyadh','3','Address reference']],
+      inputNote: 'Two configured sources linked by <strong>customer identity</strong>.',
+      outputNote: 'Uses the <strong>configured address reference</strong> as source of truth.',
+      steps: ['Relate order to customer identity','Resolve trusted address source'],
+      explanation: '<strong>Address reference:</strong> SAM uses saved field relationships to join the export with its reference data and select the configured authoritative address.'
+    }
+  };
+  const tabs = Array.from(document.querySelectorAll('[data-samx-scenario]'));
+  if (!tabs.length) return;
+  function draw(id, headers, rows) {
+    const table = document.getElementById(id); if (!table) return;
+    const head = document.createElement('thead'), hr = document.createElement('tr');
+    headers.forEach(h => { const th = document.createElement('th'); th.textContent=h; hr.appendChild(th); });
+    head.appendChild(hr);
+    const body = document.createElement('tbody');
+    rows.forEach(r=> { const tr=document.createElement('tr'); r.forEach(v=> {const td=document.createElement('td'); td.textContent=v;tr.appendChild(td);});body.appendChild(tr);});
+    table.replaceChildren(head,body);
+  }
+  function activate(tab) {
+    const e=examples[tab.dataset.samxScenario];if(!e)return;
+    tabs.forEach(t=>{const on=t===tab;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;});
+    document.getElementById('samx-demo-panel').setAttribute('aria-labelledby',tab.id);
+    draw('samx-input-table',e.inputHeaders,e.inputRows);draw('samx-output-table',e.outputHeaders,e.outputRows);
+    document.getElementById('samx-input-label').textContent=e.label;
+    document.getElementById('samx-input-note').innerHTML=e.inputNote;
+    document.getElementById('samx-output-note').innerHTML=e.outputNote;
+    document.getElementById('samx-scenario-explain').innerHTML=e.explanation;
+    const steps=document.getElementById('samx-transform-list');steps.replaceChildren();
+    e.steps.forEach(step=>{const x=document.createElement('div');x.textContent=step;steps.appendChild(x);});
+  }
+  tabs.forEach((tab,i)=>{
+    tab.addEventListener('click',()=>activate(tab));
+    tab.addEventListener('keydown',e=>{
+      let j=i;
+      if(e.key==='ArrowRight')j=(i+1)%tabs.length;
+      else if(e.key==='ArrowLeft')j=(i+tabs.length-1)%tabs.length;
+      else if(e.key==='Home')j=0;
+      else if(e.key==='End')j=tabs.length-1;
+      else return;
+      e.preventDefault();tabs[j].focus();activate(tabs[j]);
+    });
+  });
+  activate(tabs[0]);
+})();
+</script>
+</body></html>
