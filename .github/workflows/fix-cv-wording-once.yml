@@ -1,0 +1,55 @@
+name: One-time CV wording correction
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-cv-wording-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  correct-cv:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PDF editor
+        run: python -m pip install 'pymupdf>=1.24,<2'
+      - name: Remove repo-specific artifact retention wording
+        run: |
+          python - <<'PY'
+          import fitz
+          from pathlib import Path
+
+          path = Path("cv/backend-engineer.pdf")
+          doc = fitz.open(path)
+          target = "; 3-day build artifacts"
+          matches = doc[0].search_for(target)
+          if len(matches) != 1:
+              raise RuntimeError(f"Expected exact CV phrase once, got {len(matches)}")
+          for rect in matches:
+              doc[0].add_redact_annot(rect, fill=(1, 1, 1))
+          doc[0].apply_redactions(images=0, graphics=0)
+          output = path.with_suffix(".temporary.pdf")
+          doc.save(output, garbage=4, deflate=True)
+          doc.close()
+          verification = fitz.open(output)
+          content = "\n".join(page.get_text() for page in verification)
+          assert "DevOps & CI/CD: GitHub Actions; automated Django testing; system checks" in content
+          assert "3-day build artifacts" not in content
+          assert len(verification) == 2
+          verification.close()
+          output.replace(path)
+          PY
+      - name: Commit PDF correction
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add cv/backend-engineer.pdf
+          git commit -m 'Remove artifact retention detail from backend CV'
+          git push
