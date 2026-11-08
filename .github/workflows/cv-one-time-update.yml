@@ -1,0 +1,123 @@
+name: Apply approved CV updates (one-time)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/cv-one-time-update.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-pdfs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PDF editor
+        run: python -m pip install 'pymupdf==1.26.7'
+      - name: Apply only user-approved changes to existing PDFs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import fitz
+          
+          def color(n):
+              return ((n >> 16 & 255)/255, (n >> 8 & 255)/255, (n & 255)/255)
+          
+          def edit(path, revisions, expected, forbidden):
+              doc = fitz.open(path)
+              original_pages = len(doc)
+              pending = {}
+              for old, new, mode in revisions:
+                  hits = []
+                  for page in doc:
+                      for block in page.get_text("dict")["blocks"]:
+                          for line in block.get("lines", []):
+                              spans = line["spans"]
+                              joined = "".join(s["text"] for s in spans)
+                              if mode == "line" and joined == old:
+                                  hits.append((page, spans, line["bbox"]))
+                              elif mode == "first" and spans and spans[0]["text"] == old:
+                                  hits.append((page, [spans[0]], spans[0]["bbox"]))
+                              elif mode == "last" and len(spans) > 1 and spans[-1]["text"] == old:
+                                  hits.append((page, [spans[-1]], spans[-1]["bbox"]))
+                  if len(hits) != 1:
+                      raise RuntimeError(f"{path}: expected exactly one original text match for {old[:80]!r}; found {len(hits)}")
+                  page, spans, bounds = hits[0]
+                  first = spans[0]
+                  font = "hebo" if "Bold" in first["font"] else "helv"
+                  size = first["size"]
+                  origin = first["origin"]
+                  width = fitz.get_text_length(new, fontname=font, fontsize=size)
+                  if width > page.rect.width - origin[0] - 50:
+                      raise RuntimeError(f"Replacement too wide in {path}: {new[:75]}")
+                  box = fitz.Rect(bounds)
+                  box.x0 -= 0 if mode == "last" else .05
+                  box.x1 += .05
+                  box.y0 -= .1
+                  box.y1 += .1
+                  pending.setdefault(page, []).append((box, origin, new, font, size, color(first["color"])))
+              for page, changes in pending.items():
+                  for box, *_ in changes:
+                      page.add_redact_annot(box, fill=(1,1,1))
+                  page.apply_redactions(images=0, graphics=0, text=0)
+                  for box, origin, new, font, size, ink in changes:
+                      page.insert_text(origin, new, fontname=font, fontsize=size, color=ink, overlay=True)
+              text = "\n".join(p.get_text() for p in doc)
+              for fragment in expected:
+                  if fragment not in text:
+                      raise RuntimeError(f"{path}: updated text not found: {fragment}")
+              for fragment in forbidden:
+                  if fragment in text:
+                      raise RuntimeError(f"{path}: obsolete text still present: {fragment}")
+              output = path.with_suffix(".edited.pdf")
+              doc.save(output, garbage=4, deflate=True)
+              doc.close()
+              output.replace(path)
+              verify = fitz.open(path)
+              if len(verify) != original_pages:
+                  raise RuntimeError(f"{path}: page count unexpectedly changed")
+              verify.close()
+              print("Updated and verified", path)
+          
+          backend = [
+           ("BACKEND SOFTWARE ENGINEER  |  PYTHON, DJANGO & POSTGRESQL", "BACKEND SOFTWARE ENGINEER  |  PYTHON, DJANGO, MYSQL & JAVASCRIPT", "line"),
+           ("commerce workflows. Created ShipMatrix, a B2B platform that has processed over 1 million orders, and ", "commerce workflows. Created ShipMatrix, a B2B platform processing 230K+ consolidated shipments, and", "line"),
+           ("Python; JavaScript; Django; Django Oscar; PostgreSQL; MySQL; SQLite; data modeling; backend ", "Python; Django; MySQL; JavaScript; Django Oscar; PostgreSQL; SQLite; data modeling;", "last"),
+           ("business rules; CSV/Excel ingestion and transformation", "backend business rules; CSV/Excel ingestion and transformation", "line"),
+           ("Founder & Lead Backend Engineer  |  ShipMatrix Solutions", "Creator & Backend Engineer  |  ShipMatrix Solutions", "first"),
+           ("  Independently designed, built and operated ShipMatrix, a B2B logistics automation platform that has processed 1M+ ", "  Independently designed, built and operated ShipMatrix, a B2B logistics automation platform that processed", "last"),
+           ("orders through shipping and warehouse workflows.", "230K+ consolidated shipments through shipping and warehouse workflows.", "line"),
+           ("independent technical lead.", "independent backend engineer.", "line"),
+          ]
+          logistics = [
+           ("and the UAE at Align Technology. Founded ShipMatrix, a logistics automation platform that has processed 1M+ orders. ", "and the UAE at Align Technology. Created ShipMatrix, a logistics platform processing 230K+ consolidated shipments.", "line"),
+           ("Founder | Logistics Automation & Operations  |  ShipMatrix Solutions", "Creator | Logistics Automation & Operations  |  ShipMatrix Solutions", "first"),
+           ("  Founded and independently operate a B2B platform that has processed more than 1 million orders through shipping ", "  Created and independently operate a B2B platform that has processed over 230,000 consolidated shipments", "last"),
+           ("and warehouse workflows.", "through shipping and warehouse workflows.", "line"),
+          ]
+          edit(Path("cv/backend-engineer.pdf"), backend, 
+               ["Creator & Backend Engineer", "230K+ consolidated shipments", "PYTHON, DJANGO, MYSQL & JAVASCRIPT", "GitHub Actions"],
+               ["Founder & Lead Backend Engineer", "independent technical lead.", "1M+", "over 1 million orders"])
+          edit(Path("cv/logistics-operations.pdf"), logistics, 
+               ["Creator | Logistics Automation", "230K+ consolidated shipments", "230,000 consolidated shipments"],
+               ["Founder | Logistics", "Founded ShipMatrix", "1M+", "more than 1 million orders"])
+          
+          PY
+      - name: Commit only the two updated CV PDFs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add cv/backend-engineer.pdf cv/logistics-operations.pdf
+          if git diff --cached --quiet; then
+            echo 'No CV changes detected'
+          else
+            git commit -m 'Update backend and logistics CV titles, shipment metrics and tech stack'
+            git push
+          fi
