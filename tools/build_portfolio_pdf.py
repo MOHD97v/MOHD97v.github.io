@@ -22,8 +22,8 @@ OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 
 # Fail loudly rather than publishing a stale document if the source facts change.
 html = (ROOT / 'index.html').read_text(encoding='utf-8')
-for fact in ('231,719 consolidated shipments', '1.39 million', 'PRODUCTION USE',
-             'Creator &amp; Backend Engineer', 'CI/CD', 'django-pricing-engine-demo'):
+for fact in ('231,719 consolidated shipments', '1.39 million', 'In production at Align Technology.',
+             'Creator and backend engineer', 'CI/CD', 'django-pricing-engine-demo'):
     if fact not in html:
         raise SystemExit(f'Portfolio PDF source fact missing from index.html: {fact}')
 
